@@ -6,6 +6,10 @@ using std::string;
 
 //brute force
 bool checkPermutations1(string s1, string s2) {
+    if (s1.length() != s2.length()) {
+        return false;
+    }
+
     for (string::size_type i = 0; i != s1.length(); ++i) {
         bool found = false;
         for (string::size_type j = 0; j != s2.length(); ++j) {
@@ -21,6 +25,10 @@ bool checkPermutations1(string s1, string s2) {
 }
 
 bool checkPermutations2(string s1, string s2) {
+    if (s1.length() != s2.length()) {
+        return false;
+    }
+
     HashMap<char, int> map = HashMap<char, int>();
     for (string::size_type i = 0; i != s1.size(); ++i) {
         map.insert(s1[i], 1);
