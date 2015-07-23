@@ -5,7 +5,7 @@ SOURCES=$(wildcard $(INCDIR)/*.cpp)
 OBJS=$(SOURCES:.cpp=.o)
 EXEC=run
 
-all: check_palindrome_permutations
+all: one_off
 
 check_palindrome_permutations: $(OBJS) check_palindrome_permutations.cpp
 	$(CC) $(CFLAGS) $(OBJS) -I$(INCDIR) check_palindrome_permutations.cpp -o $(EXEC)
@@ -21,6 +21,10 @@ check_permutations: $(OBJS) check_permutations.cpp
 #1.3
 urlify: $(OBJS) urlify.cpp
 	$(CC) $(CFLAGS) $(OBJS) -I$(INCDIR) urlify.cpp
+
+#1.4
+one_off: $(OBJS) one_off.cpp
+	$(CC) $(CFLAGS) $(OBJS) -I$(INCDIR) one_off.cpp
 
 $(INCDIR)/%.o: $(INCDIR)/%.cpp
 	$(CC) $(CFLAGS) -c $< -o $(INCDIR)/$@

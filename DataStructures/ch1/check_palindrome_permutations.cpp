@@ -7,6 +7,7 @@ using std::cin;
 using std::endl;
 using std::string;
 
+//TODO 
 int getCharValue(char c) {
     int capitalA = (int)'A';
     int capitalZ = (int)'Z';
@@ -25,7 +26,8 @@ int getCharValue(char c) {
 int* getFrequencyMap(const string& a) {
     int* map = new int[(int)'z' - (int)'a'];
     for (string::const_iterator i = a.cbegin(); i != a.cend(); ++i) {
-        map[getCharValue(*i)] = (map[getCharValue(*i)] ? 0 : 1);
+        if (*i != ' ')
+            map[getCharValue(*i)] = (map[getCharValue(*i)] ? 0 : 1);
     }
     return map;
 }
@@ -35,11 +37,13 @@ bool checkPalindromePermutations(const string& a) {
     bool foundOdd = false;
 
     for (string::const_iterator i = a.cbegin(); i != a.cend(); ++i) {
-        if (freqMap[getCharValue(*i)] == 0) { //odd number of times
+        if (*i != " " && freqMap[getCharValue(*i)] == 1) { //odd number of times
             if (!foundOdd)
                 foundOdd = true;
             else
                 return false; //more than one letter that occurred an odd number of times
+        } else {
+            cout << " SPACE" << endl;
         }
     }
     return true;
