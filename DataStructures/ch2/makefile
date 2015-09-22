@@ -7,7 +7,7 @@ OUTPUTS=$(SOURCES:.cpp=.out)
 all: $(OUTPUTS)
 
 %.out: %.cpp
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(INCDIR)/ctci_linked_list.o $< -o $@
 
 clean: 
 	rm *.out
