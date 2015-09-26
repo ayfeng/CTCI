@@ -6,26 +6,33 @@
 using std::cin; using std::cout; using std::endl;
 using std::set;
 
-void removeDups(Node* list) {
-    Node* newList = list;
-    set<int> list_numbers;
+void removeDups(Node*& list) {
+    set<int> seen;
 
-    //for (Node* n = list; n->next != nullptr; n = n->next) {
-        //list_numbers.insert(n->data);
-    //}
+    Node* result = new Node(list->data);
 
-    while (list->next != nullptr) {
-        cout << list->data << endl;
-        if (!list_numbers.count(list->data)) {
-            newList = new Node(list->data);
-            list_numbers.insert(list->data);
-        } else {
-            newList->next = list->next->next;
-        }
-        newList = newList->next;
-        list = list->next;
+    for (Node* n = list->next; n != nullptr; n = n->next) {
+        if (!seen.count(n->data)) {
+            result->appendToTail(n->data);
+            seen.insert(n->data);
+        } 
     }
 
+
+    list = result;
+}
+
+void removeDupsNoBuffer(Node*& list) {
+    for (Node* current = list; current->next != nullptr; current = current->next) {
+        for (Node* runner = current; runner->next != nullptr;) {
+            if (current->data == runner->next->data) {
+                runner->next = runner->next->next;
+            } else {
+                runner = runner->next;
+            }
+        }
+    }
+    
 }
 
 int main() {
@@ -44,11 +51,18 @@ int main() {
         }
     }
 
-    removeDups(list);
+    //removeDups(list);
+
+    //for (Node* n = list; n != nullptr; n = n->next) {
+        //cout << n->data << " ";
+    //}
+
+    removeDupsNoBuffer(list);
 
     for (Node* n = list; n != nullptr; n = n->next) {
         cout << n->data << " ";
     }
+
     cout << endl;
 }
 
