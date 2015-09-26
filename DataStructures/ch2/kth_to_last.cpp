@@ -18,6 +18,16 @@ int kth_to_last_recursive(Node* list, int k) {
     }
 }
 
+int kth_to_last2(Node* list, int k) {
+    Node* forward = list, *back = list;
+
+    for (int i = 0; i != k && forward != nullptr; ++i, forward = forward->next);
+
+    for (back = list; forward != nullptr; back = back->next, forward = forward->next);
+
+    return back->data;
+}
+
 int main() {
     int list_length, k;
     cin >> list_length >> k;
@@ -41,4 +51,6 @@ int main() {
     //}
     
     kth_to_last_recursive(list, k);
+
+    cout << kth_to_last2(list, k) << endl;
 }
